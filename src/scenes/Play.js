@@ -115,10 +115,7 @@ class Play extends Phaser.Scene
         }, null, this);
 
         this.music = this.sound.add('lastBreath');
-        this.booms = this.sound.add('exp1');
-        this.booms = this.sound.add('exp2');
-        this.booms = this.sound.add('exp3');
-        this.booms = this.sound.add('exp4');
+        
         
         this.music.play();
 
@@ -224,7 +221,7 @@ class Play extends Phaser.Scene
         // score add and repaint
         this.p1Score += Shark.points;
         this.scoreLeft.text = this.p1Score;
-        this.booms.play();
+        this.playABlast();
     }
 
 
@@ -233,6 +230,37 @@ class Play extends Phaser.Scene
         this.torpedo.reset();
         Torpedo.x = Sub.x;
         Torpedo.y = Sub.y;
+    }
+
+    playABlast()
+    {
+        let pick = Phaser.Math.Between(1,4);
+        
+
+        if(pick == 1)
+        {
+            this.sound.play('exp1');
+
+        }
+
+        else if(pick == 2)
+        {
+            this.sound.play('exp2');
+
+        }
+
+        else if(pick == 3)
+        {
+            this.sound.play('exp3');
+
+        }
+
+        else if(pick == 4)
+        {
+            this.sound.play('exp4');
+
+        }
+
     }
 
     
