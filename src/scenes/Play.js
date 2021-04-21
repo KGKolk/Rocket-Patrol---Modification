@@ -12,6 +12,13 @@ class Play extends Phaser.Scene
         this.load.image('oceanfield', './assets/oceanfield.png');
         this.load.image('forwardframe', './assets/forwardFrame.png');
         this.load.image('Torpedo', './assets/torpedo.png');
+        this.load.audio('lastBreath', './assets/Jim Hall - Last Breath.mp3');
+        this.load.audio('exp1', './assets/Exp1.wav');
+        this.load.audio('exp2', './assets/Exp2.wav');
+        this.load.audio('exp3', './assets/Exp3.wav');
+        this.load.audio('exp4', './assets/Exp4.wav');
+
+
         
         // load spritesheet
         this.load.spritesheet('gore', './assets/gore.png', {
@@ -106,16 +113,29 @@ class Play extends Phaser.Scene
             scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
+
+        this.music = this.sound.add('lastBreath');
+        this.booms = this.sound.add('exp1');
+        this.booms = this.sound.add('exp2');
+        this.booms = this.sound.add('exp3');
+        this.booms = this.sound.add('exp4');
+        
+        this.music.play();
+
     }
 
     update() 
     {
         // check key input for restart
-        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
+        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) 
+        {
+            this.music.stop();
             this.scene.restart();
         }
 
-        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) 
+        {
+            this.music.stop();
             this.scene.start("menuScene");
         }
 
@@ -131,7 +151,6 @@ class Play extends Phaser.Scene
             this.shark02.update();
             this.shark03.update(); 
             this.needleShark.update();  
-            
         }
 
         
@@ -205,7 +224,7 @@ class Play extends Phaser.Scene
         // score add and repaint
         this.p1Score += Shark.points;
         this.scoreLeft.text = this.p1Score;
-        this.sound.play('sfx_explosion')
+        this.booms.play();
     }
 
 
@@ -215,4 +234,6 @@ class Play extends Phaser.Scene
         Torpedo.x = Sub.x;
         Torpedo.y = Sub.y;
     }
+
+    
 }
