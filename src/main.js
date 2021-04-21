@@ -1,6 +1,7 @@
 //Constantine Kolokousis
 //Sub Patrol 
 //April 21, 2021
+//~10 Hour Worktime
 
 // Modifications Made --------------------------------------------------------------
 /*Create a new spaceship type (w/ new artwork) 
